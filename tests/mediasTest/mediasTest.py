@@ -3,6 +3,7 @@ from utilities.testStatus import TestStatus
 from utilities.util import Util
 from pages.loginPage.login_page import LoginPage
 from pages.mediasPage.mediasPage import MediasPage
+from pages.mainMenuPage.mainMenuPage import MainMenuPage
 import utilities.custom_logger as cl
 from ddt import ddt, data, unpack
 from utilities.read_csv import getCSVData
@@ -20,6 +21,7 @@ class LoginTest(unittest.TestCase):
         log = cl.customLogger(logging.DEBUG)
         self.loginPage = LoginPage(self.driver)
         self.mediasPage = MediasPage(self.driver)
+        self.mainMenu = MainMenuPage(self.driver)
         self.basePage = BasePage(self.driver)
         self.util = Util()
         self.testStatus = TestStatus(self.driver)
@@ -30,7 +32,7 @@ class LoginTest(unittest.TestCase):
                               isDigitalDDT, detailsDDT, commentsDDT, contactNumDDT, rentTimeDDT, postCodeDDT, cityDDT, streetDDT):
         self.loginPage.login(userEmailDDT, userpwDDT)
         self.testStatus.mark(result=self.loginPage.checkLoginSuccessfull(), resultMessage="Login successfuly check")
-        self.mediasPage.openMediasPage()
+        self.mainMenu.openMediasPage()
         self.testStatus.mark(result=self.mediasPage.checkMediaTitlePresent(), resultMessage="Open medias page check")
         self.mediasPage.openAddNewMedia()
         self.testStatus.mark(result=self.mediasPage.checkAddNewMediaTitlePresent(),
@@ -38,6 +40,7 @@ class LoginTest(unittest.TestCase):
         self.mediasPage.fillNewMediaForm(mediaNameDDT, heightDDT, lenghtDDT, qtyDDT, detailsDDT, commentsDDT,
                                          contactNumDDT, rentTimeDDT, postCodeDDT, cityDDT, streetDDT)
         self.mediasPage.clickSaveMediaBtn()
+        self.util.sleep(20)
         self.testStatus.markFinal(testName="Media created successfully",
                                   result=self.mediasPage.checkMediaTitlePresent(),
                                   resultMessage="Open medias page check")
@@ -48,7 +51,7 @@ class LoginTest(unittest.TestCase):
     def validateNewMediaAdded(self, userEmailDDT, userpwDDT, mediaNameDDT, heightDDT, lenghtDDT, qtyDDT,
                               isDigitalDDT, detailsDDT, commentsDDT, contactNumDDT, rentTimeDDT, postCodeDDT, cityDDT, streetDDT):
         self.loginPage.login(userEmailDDT, userpwDDT)
-        self.mediasPage.openMediasPage()
+        self.mainMenu.openMediasPage()
         mediaDatasFromTable = self.basePage.getParentRowElementsByChildFromTable(mediaNameDDT)
         mediaDatasFromFile = self.mediasPage.listFromTableData(mediaNameDDT, heightDDT, lenghtDDT, qtyDDT, isDigitalDDT)
         areListsMatch = self.util.verifyListMatch(mediaDatasFromFile, mediaDatasFromTable)

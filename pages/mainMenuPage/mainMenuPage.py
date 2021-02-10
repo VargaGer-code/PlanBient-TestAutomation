@@ -11,44 +11,163 @@ class MainMenuPage(BasePage):
         super().__init__(driver)
         self.driver = driver
 
-    ### Main menu locators
-
+    ### Topbar menu locators
 
     ### Médiafelületek kezelése
     _mediasMainBtn = "//button[contains(text(),'Médiafelületek kezelése')]"
-    # Médiafelületek listája
-    _mediasListBtn = "//p[contains(text(),'Médiafelületek listája')]"
+    # Médiafelületek listája oldal
+    _mediasPageBtn = "//a[@href='/medias']"
+    # Médiafelületek lista title
+    _mediasPageTitle = "//h3[contains(text(),'Médiafelület lista')]"
+
+    ### Projektek és folyamatok
+    _projectsMainBtn = "//button[contains(text(),'Projektek és folyamatok')]"
+
+    # Kampányok kezelése
+    _campaignsPageBtn = "//a[@href='/campaigns']"
+    # Kampányok lista title
+    _campaignsPageTitle = "//h3[contains(text(),'Kampányok lista')]"
 
     ### Beállítások és opciók
-    # Beállítások és opciók nagy gomb
     _settingsAndOptionsBtn = "//button[contains(text(),'Beállítások és opciók')]"
+
+    # Munkatársak
+    _employeesPageBtn = "//a[@href='/employees']"
+    _employeesPageTitle = "//h3[contains(text(),'Munkatársak lista')]"
+    # Partnerek
+    _partnersPageBtn = "//a[@href='/partners']"
+    _partnersPageTitle = "//h3[contains(text(),'Partner lista')]"
+    # Felhasználók
+    _usersPageBtn = "//a[@href='/accounts']"
+    _usersPageTitle = "//h3[contains(text(),'Felhasználó lista')]"
 
     ### User profile and other stuff
     _userSettingsBtn = "//div[@class='topbar__right']//button[1]"
     _logoutBtn = "//p[contains(text(),'Kilépés')]"
     # User profile
-    _profileBtn = "//a[@href='/profile']"
+    _profilePageBtn = "//a[@href='/profile']"
     _userProfileType = "//p[contains(text(),'Jogosultsági szint')]//parent::div//span[contains(text(),'Közzétevő')]"
     _userProfileHeaderText = "//h3[contains(text(),'Felhasználói profil')]"
 
     ### Actions
-    # User profile and other stuff
+    ### Medias
+    def openMediasTopbar(self):
+        self.waitForElement(self._mediasMainBtn, timeout=3)
+        self.mouseHover(self._mediasMainBtn)
+
+    def isMediasTopbarVisible(self):
+        isMediasTopbarVisible = self.isElementPresent(self._mediasMainBtn)
+        return isMediasTopbarVisible
+
+
+    # Medias Page
+    def openMediasPage(self):
+        self.elementClick(self._mediasPageBtn)
+
+    def isMediasPageBtnVisible(self):
+        isMediasPageBtnVisible = self.isElementPresent(self._mediasPageBtn)
+        return isMediasPageBtnVisible
+
+    def isMediasPageOpenedSuccesfully(self):
+        isMediasPageOpenedSuccesfully = self.isElementPresent(self._mediasPageTitle)
+        return isMediasPageOpenedSuccesfully
+
+    ### Projects
+    def openProjectTopbar(self):
+        self.waitForElement(self._projectsMainBtn, timeout=3)
+        self.mouseHover(self._projectsMainBtn)
+
+    def isProjectTopbarVisible(self):
+        isProjectTopbarVisible = self.isElementPresent(self._projectsMainBtn)
+        return isProjectTopbarVisible
+
+    # Campaigns
+    def openCampaignPage(self):
+        self.openProjectTopbar()
+        self.elementClick(self._campaignsPageBtn)
+
+    def isCampaignPageBtnVisible(self):
+        isCampaignPageBtnVisible = self.isElementPresent(self._campaignsPageBtn)
+        return isCampaignPageBtnVisible
+
+    def isCampaignPageOpenedSuccesfully(self):
+        isCampaignPageOpenedSuccesfully = self.isElementPresent(self._campaignsPageTitle)
+        return isCampaignPageOpenedSuccesfully
+
+    ### Settings and options
+    def openSettingsAndOptionsTopbar(self):
+        self.waitForElement(self._settingsAndOptionsBtn)
+        self.mouseHover(self._settingsAndOptionsBtn)
+
+    def isSettingsAndOptionsTopbarVisible(self):
+        isSettingsAndOptionsTopbarVisible = self.isElementPresent(self._settingsAndOptionsBtn)
+        return isSettingsAndOptionsTopbarVisible
+
+    # Employees
+    def openEmployeesPage(self):
+        self.openSettingsAndOptionsTopbar()
+        self.elementClick(self._employeesPageBtn)
+
+    def isEmployeesPageBtnVisible(self):
+        isEmployeesPageBtnVisible = self.isElementPresent(self._employeesPageBtn)
+        return isEmployeesPageBtnVisible
+
+    def isEmployeesPageOpenedSuccesfully(self):
+        isEmployeesPageOpenedSuccesfully = self.isElementPresent(self._employeesPageTitle)
+        return isEmployeesPageOpenedSuccesfully
+
+    # Partners
+    def openPartnersPage(self):
+        self.openSettingsAndOptionsTopbar()
+        self.elementClick(self._partnersPageBtn)
+
+    def isPartnersPageBtnVisible(self):
+        isPartnersPageBtnVisible = self.isElementPresent(self._partnersPageBtn)
+        return isPartnersPageBtnVisible
+
+    def isPartnersPageOpenedSuccesfully(self):
+        isPartnersPageOpenedSuccesfully = self.isElementPresent(self._partnersPageTitle)
+        return isPartnersPageOpenedSuccesfully
+
+    # Users
+    def openUsersPage(self):
+        self.openSettingsAndOptionsTopbar()
+        self.elementClick(self._usersPageBtn)
+
+    def isUsersPageBtnVisible(self):
+        isUsersPageBtnVisible = self.isElementPresent(self._usersPageBtn)
+        return isUsersPageBtnVisible
+
+    def isUsersPageOpenedSuccesfully(self):
+        isUsersPageOpenedSuccesfully = self.isElementPresent(self._usersPageTitle)
+        return isUsersPageOpenedSuccesfully
+
+    # User profile settings, logout and other stuff
     def openSettingsTopbar(self):
         self.waitForElement(self._userSettingsBtn)
         self.mouseHover(self._userSettingsBtn)
 
     def openUserProfile(self):
-        self.elementClick(self._profileBtn)
-
-    def isProfileOpenedSuccesfully(self):
-        isUserProfileOpened = self.isElementPresent(self._userProfileHeaderText)
-        return isUserProfileOpened
+        self.elementClick(self._profilePageBtn)
 
     def logout(self):
         self.openSettingsTopbar()
         self.elementClick(self._logoutBtn)
 
+    # Profile menu
+    def isProfileOpenedSuccesfully(self):
+        """
+        Validates user profile is opened by header text
+        """
+        isUserProfileOpened = self.isElementPresent(self._userProfileHeaderText)
+        return isUserProfileOpened
+
     def checkUserName(self, userName):
+        """
+        Validates userName displayed in user profile menu.
+        :param userName: Username to validate
+        :return: False if username is NOT displayed ; True if username is displayed
+        """
         if self.isElementNotDisplayed("//p[contains(text(),'Felhasználói név')]//parent::div//span[contains(text(),'" + userName + "')]") == True:
             return False
         else:
@@ -56,6 +175,11 @@ class MainMenuPage(BasePage):
         return isUserNameMatch
 
     def checkUserType(self, userType):
+        """
+        Validates userType displayed in user profile menu.
+        :param userName: userType to validate (Admin, Reklámközzétevő, MHFÉ, Reklámközvetítő, Reklámozó)
+        :return: False if userType is NOT displayed ; True if userType is displayed
+        """
         if self.isElementNotDisplayed("//p[contains(text(),'Jogosultsági szint')]//parent::div//span[contains(text(),'" + userType + "')]") == True:
             return False
         else:

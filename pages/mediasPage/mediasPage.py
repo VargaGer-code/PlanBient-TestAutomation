@@ -51,10 +51,6 @@ class MediasPage(BasePage):
     ### Actions
     # Medias list page
 
-    def openMediasPage(self):
-        self.elementClick(mainMenu._mediasMainBtn)
-        self.elementClick(mainMenu._mediasListBtn)
-
     def openAddNewMedia(self):
         self.elementClick(self._addNewMediaBtn)
 

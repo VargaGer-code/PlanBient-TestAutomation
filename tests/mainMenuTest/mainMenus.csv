@@ -1,6 +1,6 @@
-emailDDT;pwDDT;userNameDDT;userTypeDDT;mediasPageDDT;campaignPageDDT;ColleguesDDT;PartnersDDT
-user1@test.com;Wasd1234;Test User1;Admin;1;1;1;1
-user2@test.com;Wasd1234;Test User2;Közzétev;1;1;1;1
-user3@test.com;Wasd1234;Test User3;MHFÉ;1;1;1;1
-user4@test.com;Wasd1234;Test User4;Reklámközvetít;0;1;1;1
-user5@test.com;Wasd1234;Test User5;Reklámoz;0;1;1;1
+emailDDT;pwDDT;userNameDDT;userTypeDDT;mediasMainBtnDDT;mediasPageDDT;projectsMainBtnDDT;campaignPageDDT;settingsMainBtnDDT;colleguesDDT;partnersDDT;users
+user1@test.com;Wasd1234;Test User1;Admin;1;1;1;1;1;1;1;1
+user2@test.com;Wasd1234;Test User2;Közzétev;1;1;1;1;1;1;1;0
+user3@test.com;Wasd1234;Test User3;MHFÉ;1;1;1;1;1;1;1;0
+user4@test.com;Wasd1234;Test User4;Reklámközvetít;1;0;1;1;1;1;1;0
+user5@test.com;Wasd1234;Test User5;Reklámoz;1;0;1;1;1;1;1;0

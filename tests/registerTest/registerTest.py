@@ -34,7 +34,7 @@ class RegistrationTest(unittest.TestCase):
                                             city=cityDDT, street=streetDDT, contactEmail=contactEmailDDT)
         self.registerPage.clickAszfBtn()
         self.registerPage.clickRegistrationBtn()
-        self.testStatus.markFinal("Registration successful test", result=self.registerPage.registrationSuccessfulCheck(), resultMessage="Registration successful check")
+        self.testStatus.markFinal("Registration test", result=self.registerPage.registrationSuccessfulCheck(), resultMessage="Registration successful check")
 
     @data(*getCSVData("tests/registerTest/validateAlertMsg.csv"))
     @unpack

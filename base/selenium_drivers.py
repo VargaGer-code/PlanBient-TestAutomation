@@ -43,7 +43,7 @@ class SeleniumDrivers():
             self.log.info("Screenshot saved to directory: " + destinationFile)
         except:
             self.log.error("### Screenshot error Occured")
-            print_stack()
+            #print_stack()
 
     def getElementList(self, locator, locatorType="xpath"):
         """
@@ -145,7 +145,7 @@ class SeleniumDrivers():
         except:
             self.log.info("Cannot send data on the element with locator: " + locator +
                   " locatorType: " + locatorType)
-            print_stack()
+            #print_stack()
 
 
     def getText(self, locator="", locatorType="xpath", element=None, info=""):
@@ -166,7 +166,7 @@ class SeleniumDrivers():
                 text = text.strip()
         except:
             self.log.error("Failed to get text on element " + info)
-            print_stack()
+            #print_stack()
             text = None
         return text
 
@@ -186,7 +186,7 @@ class SeleniumDrivers():
                 self.log.debug("Text on element: " + str(self.getText(elements)))
         except:
             self.log.error("Failed to get text on element")
-            print_stack()
+            #print_stack()
         return textList
 
 
@@ -293,7 +293,7 @@ class SeleniumDrivers():
             self.log.info("Element " + locator + " appeared on the web page")
         except:
             self.log.info("Element " + locator + " not appeared on the web page")
-            print_stack()
+            #print_stack()
         return element
 
     def isElementEnabled(self, locator, locatorType="xpath"):
@@ -324,10 +324,12 @@ class SeleniumDrivers():
             # Scroll Down
             self.driver.execute_script("window.scrollBy(0, {});".format(value))
 
-    def mouseHover(self, locator, locatorType="xpath", sec=0):
+    def mouseHover(self, locator, locatorType="xpath"):
         actions = ActionChains(self.driver)
         elementToHover = self.getElement(locator, locatorType)
+        actions.move_by_offset(0, 0).perform()
         actions.move_to_element(elementToHover).perform()
+        self.log.info("Hoovering on element :: " + locator)
 
     def selectFromDropDownWithKeys(self, element, selection):
         self.elementClick(element)

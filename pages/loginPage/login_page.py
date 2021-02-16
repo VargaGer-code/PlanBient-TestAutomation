@@ -1,6 +1,5 @@
 import utilities.custom_logger as cl
 from base.basepage import BasePage
-from pages.mainMenuPage.mainMenuPage import MainMenuPage
 from utilities.util import Util
 import logging
 
@@ -17,7 +16,8 @@ class LoginPage(BasePage):
     # Login screen buttons
     _loginBtn = "//button[@type='submit']"
     _registerBtn = "//a[@href='/register']"
-    _forgotPassword = ""
+    _forgotPassword = "//a[contains(text(),'Elfelejtette jelszavát?')]"
+    _passwordVisibilityBtn = "//button[@class='form__form-group-button']"
 
     # Login screen inputs
     _emailInput = "//input[@name='email']"
@@ -30,8 +30,8 @@ class LoginPage(BasePage):
 
     ### Actions
     # Login
-    def login(self, userName, password):
-        self.enterCredentials(userName, password)
+    def login(self, email, password):
+        self.enterCredentials(email, password)
         self.elementClick(self._loginBtn)
 
     def enterCredentials(self, email, password):
@@ -49,10 +49,6 @@ class LoginPage(BasePage):
         isLoginBtnVisible = self.isElementPresent(self._loginBtn)
         return isLoginBtnVisible
 
-    def checkLoginSuccessfull(self):
-        isLoginSuccessful = self.isElementPresent(MainMenuPage._settingsAndOptionsBtn)
-        return isLoginSuccessful
-
     def alertContentCheck(self):
         isAlertContentVisible = self.isElementPresent(self._alertContent)
         return isAlertContentVisible
@@ -64,6 +60,9 @@ class LoginPage(BasePage):
     def passwordFormatAlertMessageCheck(self):
         ispasswordAlertMessageVisible = self.isElementPresent(self._passwordAlertMessage)
         return ispasswordAlertMessageVisible
+
+    def clickPasswordVisibilityBtn(self):
+        self.elementClick(self._passwordVisibilityBtn)
 
     # Registration
     def clickRegisterBtn(self):

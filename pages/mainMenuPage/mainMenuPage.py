@@ -50,111 +50,114 @@ class MainMenuPage(BasePage):
     _userProfileHeaderText = "//h3[contains(text(),'Felhasználói profil')]"
 
     ### Actions
-    ### Medias
-    def openMediasTopbar(self):
-        self.waitForElement(self._mediasMainBtn, timeout=3)
-        self.mouseHover(self._mediasMainBtn)
+    def isLoginSuccesfully(self):
+        isLoginSuccesfully = self.isElementPresent(self._settingsAndOptionsBtn)
+        return isLoginSuccesfully
 
+    ### Media operations
     def isMediasTopbarVisible(self):
         isMediasTopbarVisible = self.isElementPresent(self._mediasMainBtn)
         return isMediasTopbarVisible
 
+    def openMediasTopbar(self):
+        self.waitForElement(self._mediasMainBtn, timeout=3)
+        self.mouseHover(self._mediasMainBtn)
 
-    # Medias Page
-    def openMediasPage(self):
-        self.elementClick(self._mediasPageBtn)
-
+        # Medias
     def isMediasPageBtnVisible(self):
         isMediasPageBtnVisible = self.isElementPresent(self._mediasPageBtn)
         return isMediasPageBtnVisible
+
+    def openMediasPage(self):
+        self.elementClick(self._mediasPageBtn)
 
     def isMediasPageOpenedSuccesfully(self):
         isMediasPageOpenedSuccesfully = self.isElementPresent(self._mediasPageTitle)
         return isMediasPageOpenedSuccesfully
 
     ### Projects
-    def openProjectTopbar(self):
-        self.waitForElement(self._projectsMainBtn, timeout=3)
-        self.mouseHover(self._projectsMainBtn)
-
     def isProjectTopbarVisible(self):
         isProjectTopbarVisible = self.isElementPresent(self._projectsMainBtn)
         return isProjectTopbarVisible
 
-    # Campaigns
-    def openCampaignPage(self):
-        self.openProjectTopbar()
-        self.elementClick(self._campaignsPageBtn)
+    def openProjectTopbar(self):
+        self.waitForElement(self._projectsMainBtn, timeout=3)
+        self.mouseHover(self._projectsMainBtn)
 
+        # Campaigns
     def isCampaignPageBtnVisible(self):
         isCampaignPageBtnVisible = self.isElementPresent(self._campaignsPageBtn)
         return isCampaignPageBtnVisible
+
+    def openCampaignPage(self):
+        self.openProjectTopbar()
+        self.elementClick(self._campaignsPageBtn)
 
     def isCampaignPageOpenedSuccesfully(self):
         isCampaignPageOpenedSuccesfully = self.isElementPresent(self._campaignsPageTitle)
         return isCampaignPageOpenedSuccesfully
 
     ### Settings and options
-    def openSettingsAndOptionsTopbar(self):
-        self.waitForElement(self._settingsAndOptionsBtn)
-        self.mouseHover(self._settingsAndOptionsBtn)
-
     def isSettingsAndOptionsTopbarVisible(self):
         isSettingsAndOptionsTopbarVisible = self.isElementPresent(self._settingsAndOptionsBtn)
         return isSettingsAndOptionsTopbarVisible
 
-    # Employees
-    def openEmployeesPage(self):
-        self.openSettingsAndOptionsTopbar()
-        self.elementClick(self._employeesPageBtn)
+    def openSettingsAndOptionsTopbar(self):
+        self.waitForElement(self._settingsAndOptionsBtn)
+        self.mouseHover(self._settingsAndOptionsBtn)
 
+        # Employees
     def isEmployeesPageBtnVisible(self):
         isEmployeesPageBtnVisible = self.isElementPresent(self._employeesPageBtn)
         return isEmployeesPageBtnVisible
+
+    def openEmployeesPage(self):
+        self.openSettingsAndOptionsTopbar()
+        self.elementClick(self._employeesPageBtn)
 
     def isEmployeesPageOpenedSuccesfully(self):
         isEmployeesPageOpenedSuccesfully = self.isElementPresent(self._employeesPageTitle)
         return isEmployeesPageOpenedSuccesfully
 
-    # Partners
-    def openPartnersPage(self):
-        self.openSettingsAndOptionsTopbar()
-        self.elementClick(self._partnersPageBtn)
-
+        # Partners
     def isPartnersPageBtnVisible(self):
         isPartnersPageBtnVisible = self.isElementPresent(self._partnersPageBtn)
         return isPartnersPageBtnVisible
+
+    def openPartnersPage(self):
+        self.openSettingsAndOptionsTopbar()
+        self.elementClick(self._partnersPageBtn)
 
     def isPartnersPageOpenedSuccesfully(self):
         isPartnersPageOpenedSuccesfully = self.isElementPresent(self._partnersPageTitle)
         return isPartnersPageOpenedSuccesfully
 
-    # Users
-    def openUsersPage(self):
-        self.openSettingsAndOptionsTopbar()
-        self.elementClick(self._usersPageBtn)
-
+        # Users
     def isUsersPageBtnVisible(self):
         isUsersPageBtnVisible = self.isElementPresent(self._usersPageBtn)
         return isUsersPageBtnVisible
+
+    def openUsersPage(self):
+        self.openSettingsAndOptionsTopbar()
+        self.elementClick(self._usersPageBtn)
 
     def isUsersPageOpenedSuccesfully(self):
         isUsersPageOpenedSuccesfully = self.isElementPresent(self._usersPageTitle)
         return isUsersPageOpenedSuccesfully
 
     # User profile settings, logout and other stuff
+    def isSettingsTopbarVisible(self):
+        isSettingsTopbarVisible = self.isElementPresent(self._userSettingsBtn)
+        return isSettingsTopbarVisible
+
     def openSettingsTopbar(self):
         self.waitForElement(self._userSettingsBtn)
         self.mouseHover(self._userSettingsBtn)
 
+        # User profile page
     def openUserProfile(self):
         self.elementClick(self._profilePageBtn)
 
-    def logout(self):
-        self.openSettingsTopbar()
-        self.elementClick(self._logoutBtn)
-
-    # Profile menu
     def isProfileOpenedSuccesfully(self):
         """
         Validates user profile is opened by header text
@@ -185,3 +188,8 @@ class MainMenuPage(BasePage):
         else:
             isUserProfileMatch = self.isElementPresent("//p[contains(text(),'Jogosultsági szint')]//parent::div//span[contains(text(),'" + userType + "')]")
         return isUserProfileMatch
+
+        # Logout
+    def logout(self):
+        self.openSettingsTopbar()
+        self.elementClick(self._logoutBtn)

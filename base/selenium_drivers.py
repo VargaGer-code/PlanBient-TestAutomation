@@ -113,6 +113,22 @@ class SeleniumDrivers():
             self.screenShot(locator + " not found")
             assert False
 
+    def clickNearElement(self, locator="", xOffset=0, yOffset=0, locatorType="xpath"):
+        """
+        Click near an element
+        """
+        try:
+            element = self.getElement(locator, locatorType)
+            ActionChains(self.driver).move_to_element(to_element=element).move_by_offset(xoffset=xOffset, yoffset=yOffset).click_and_hold().release().perform()
+            self.log.info("Clicked on element with locator: " + locator +
+                          " locatorType: " + locatorType)
+        except:
+            self.log.info("Cannot click on the element with locator: " + locator +
+                          " locatorType: " + locatorType)
+            self.screenShot(locator + " not found")
+            assert False
+
+
 
     def sendKeys(self, data, locator="", locatorType="xpath", element=None):
         """

@@ -11,10 +11,11 @@ import unittest
 import pytest
 import logging
 
+# pytest tests\mediasTest\mediasTest.py -s -v --browser edge
 
 @ddt
 @pytest.mark.usefixtures("getWebdriver")
-class LoginTest(unittest.TestCase):
+class MediasTest(unittest.TestCase):
 
     @pytest.fixture(autouse=True)
     def classSetup(self, getWebdriver):
@@ -26,27 +27,29 @@ class LoginTest(unittest.TestCase):
         self.util = Util()
         self.testStatus = TestStatus(self.driver)
 
-    @data(*getCSVData("mediasDatas.csv"))
+    @data(*getCSVData("C:\\Users\\Felhasználó\\PycharmProjects\\PlanBient-TestAutomation\\tests\\mediasTest\\mediasDatas.csv"))
     @unpack
-    def test_addNewMedia(self, userEmailDDT, userpwDDT, mediaNameDDT, heightDDT, lenghtDDT, qtyDDT,
-                              isDigitalDDT, detailsDDT, commentsDDT, contactNumDDT, rentTimeDDT, postCodeDDT, cityDDT, streetDDT):
+    def test_addNewMedia(self, userEmailDDT, userpwDDT, mediaNameDDT, lenghtDDT, heightDDT, qtyDDT,
+                              isDigitalDDT, labelsDDT, detailsDDT, commentsDDT, targetGroupDDT, useProposalDDT, customerCreativeDDT, extrasDDT,
+                            contactNumDDT, rentTimeDDT, postCodeDDT, cityDDT, streetDDT):
         self.loginPage.login(userEmailDDT, userpwDDT)
-        self.testStatus.mark(result=self.loginPage.checkLoginSuccessfull(), resultMessage="Login successfuly check")
+        self.testStatus.mark(result=self.mainMenu.isLoginSuccesfully(), resultMessage="Login successfuly check")
+        self.mainMenu.openMediasTopbar()
         self.mainMenu.openMediasPage()
         self.testStatus.mark(result=self.mediasPage.checkMediaTitlePresent(), resultMessage="Open medias page check")
         self.mediasPage.openAddNewMedia()
-        self.testStatus.mark(result=self.mediasPage.checkAddNewMediaTitlePresent(),
-                             resultMessage="Open medias page check")
-        self.mediasPage.fillNewMediaForm(mediaNameDDT, heightDDT, lenghtDDT, qtyDDT, detailsDDT, commentsDDT,
-                                         contactNumDDT, rentTimeDDT, postCodeDDT, cityDDT, streetDDT)
+        #self.testStatus.mark(result=self.mediasPage.checkAddNewMediaTitlePresent, resultMessage="Validate add new media page opened")
+        self.mediasPage.fillNewMediaForm(mediaName=mediaNameDDT, height=heightDDT, length=lenghtDDT, qty=qtyDDT,
+                            isDigital=isDigitalDDT, labels=labelsDDT, details=detailsDDT, comments=commentsDDT,
+                            targetGroup=targetGroupDDT, useProposal=useProposalDDT, customerCreative=customerCreativeDDT,
+                            extras=extrasDDT, contactNum=contactNumDDT, rentTime=rentTimeDDT, postCode=postCodeDDT, city=cityDDT, street=streetDDT)
         self.mediasPage.clickSaveMediaBtn()
-        self.util.sleep(20)
-        self.testStatus.markFinal(testName="Media created successfully",
-                                  result=self.mediasPage.checkMediaTitlePresent(),
-                                  resultMessage="Open medias page check")
+        self.testStatus.mark(result=self.mediasPage.checkMediaTitlePresent(), resultMessage="Validate return to medias list page")
+        self.testStatus.markFinal(testName="Add new media test", result=self.mediasPage.isMediaNameInList(mediaName=mediaNameDDT),
+                                  resultMessage="Add new media test")
 
 
-    @data(*getCSVData("mediasDatas.csv"))
+    @data(*getCSVData("C:\\Users\\Felhasználó\\PycharmProjects\\PlanBient-TestAutomation\\tests\\mediasTest\\mediasDatas.csv"))
     @unpack
     def validateNewMediaAdded(self, userEmailDDT, userpwDDT, mediaNameDDT, heightDDT, lenghtDDT, qtyDDT,
                               isDigitalDDT, detailsDDT, commentsDDT, contactNumDDT, rentTimeDDT, postCodeDDT, cityDDT, streetDDT):

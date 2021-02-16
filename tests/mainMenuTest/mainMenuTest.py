@@ -29,11 +29,6 @@ class MainMenuTest(unittest.TestCase):
                              projectsMainBtnDDT, campaignPageDDT, settingsMainBtnDDT, ColleguesDDT, PartnersDDT, users):
         """
         Validates user datas in profile menu
-        :param emailDDT:
-        :param pwDDT:
-        :param userNameDDT:
-        :param userTypeDDT:
-        :return:
         """
         self.loginPage.login(emailDDT, pwDDT)
         self.testStatus.mark(self.loginPage.checkLoginSuccessfull(), "Login successful validation")
@@ -66,10 +61,10 @@ class MainMenuTest(unittest.TestCase):
                 self.mainMenu.openMediasPage()
                 self.testStatus.mark(resultMessage="Medias page open validate",
                                      result=self.mainMenu.isMediasPageOpenedSuccesfully())
-            if mediasPageDDT == "0":
+            elif mediasPageDDT == "0":
                 self.testStatus.mark(result=not self.mainMenu.isMediasPageBtnVisible(),
                                      resultMessage="MediasPageBtn visibility")
-        if mediasMainBtnDDT == "0":
+        elif mediasMainBtnDDT == "0":
             self.testStatus.mark(result=not self.mainMenu.isMediasTopbarVisible(),
                                       resultMessage="MediasMainBtn visibility")
         # Validate project menus
@@ -84,10 +79,10 @@ class MainMenuTest(unittest.TestCase):
                 self.mainMenu.openCampaignPage()
                 self.testStatus.mark(resultMessage="Campaign page open validate",
                                      result=self.mainMenu.isCampaignPageOpenedSuccesfully())
-            if campaignPageDDT == "0":
+            elif campaignPageDDT == "0":
                 self.testStatus.mark(result=not self.mainMenu.isCampaignPageBtnVisible(),
                                      resultMessage="Campaign btn visibility")
-        if projectsMainBtnDDT == "0":
+        elif projectsMainBtnDDT == "0":
             self.testStatus.mark(result= not self.mainMenu.isProjectTopbarVisible(),
                                  resultMessage="Project Topbar visibility")
         # validate Options menu
@@ -102,7 +97,7 @@ class MainMenuTest(unittest.TestCase):
                 self.mainMenu.openEmployeesPage()
                 self.testStatus.mark(resultMessage="Employee page open validate",
                                      result=self.mainMenu.isEmployeesPageOpenedSuccesfully())
-            if campaignPageDDT == "0":
+            elif campaignPageDDT == "0":
                 self.testStatus.mark(result=not self.mainMenu.isEmployeesPageBtnVisible(),
                                      resultMessage="Employee btn visibility")
             # Validate partners menu
@@ -112,7 +107,7 @@ class MainMenuTest(unittest.TestCase):
                 self.mainMenu.openPartnersPage()
                 self.testStatus.mark(resultMessage="Partner page open validate",
                                      result=self.mainMenu.isPartnersPageOpenedSuccesfully())
-            if partnersDDT == "0":
+            elif partnersDDT == "0":
                 self.testStatus.mark(result=not self.mainMenu.isPartnersPageBtnVisible(),
                                      resultMessage="Partners btn visibility")
             # Users
@@ -122,7 +117,7 @@ class MainMenuTest(unittest.TestCase):
                 self.mainMenu.openUsersPage()
                 self.testStatus.mark(resultMessage="Users page open validate",
                                      result=self.mainMenu.isUsersPageOpenedSuccesfully())
-            if users == "0":
+            elif users == "0":
                 self.testStatus.mark(result=not self.mainMenu.isUsersPageBtnVisible(),
                                      resultMessage="Users btn visibility")
         self.mainMenu.logout()

@@ -1,10 +1,2 @@
-userEmailDDT;userpwDDT;mediaNameDDT;lenghtDDT;heightDDT;qtyDDT;isDigitalDDT;detailsDDT;commentsDDT;contactNumDDT;rentTimeDDT;postCodeDDT;cityDDT;streetDDT
-gergo.varga+kozzetevo@sensomedia.hu;aaaaaaA1;Abádszalók;35;10;1;Nem;Abádszalók;Abádszalók;1000;1 nap;5241;Abádszalók;Kunhegyesi
-gergo.varga+kozzetevo@sensomedia.hu;aaaaaaA1;Abaújszántó;132;72;1;Nem;Abaújszántó;Abaújszántó;1000;2 nap;3881;Abaújszántó;Gönci
-gergo.varga+kozzetevo@sensomedia.hu;aaaaaaA1;Abony;229;134;1;Nem;Abony;Abony;1000;3 nap;2740;Abony;Ceglédi
-gergo.varga+kozzetevo@sensomedia.hu;aaaaaaA1;Ács;326;196;1;Nem;Ács;Ács;1000;4 nap;2941;Ács;Komáromi
-gergo.varga+kozzetevo@sensomedia.hu;aaaaaaA1;Adony;423;258;1;Nem;Adony;Adony;1000;5 nap;2457;Adony;Dunaújvárosi
-gergo.varga+kozzetevo@sensomedia.hu;aaaaaaA1;Ajak;520;320;1;Nem;Ajak;Ajak;1000;6 nap;4524;Ajak;Kisvárdai
-gergo.varga+kozzetevo@sensomedia.hu;aaaaaaA1;Ajka;617;382;1;Nem;Ajka;Ajka;1000;7 nap;8400;Ajka;Ajkai
-gergo.varga+kozzetevo@sensomedia.hu;aaaaaaA1;Albertirsa;714;444;1;Nem;Albertirsa;Albertirsa;1000;8 nap;2730;Albertirsa;Ceglédi
-gergo.varga+kozzetevo@sensomedia.hu;aaaaaaA1;Alsózsolca;811;506;1;Nem;Alsózsolca;Alsózsolca;1000;9 nap;3571;Alsózsolca;Miskolci
+userEmailDDT;userpwDDT;mediaNameDDT;lenghtDDT;heightDDT;qtyDDT;isDigitalDDT;labelsDDT;detailsDDT;commentsDDT;targetGroupDDT;useProposalDDT;customerCreativeDDT;extrasDDT;contactNumDDT;rentTimeDDT;postCodeDDT;cityDDT;streetDDT
+gergo.varga+kozzetevo1@sensomedia.hu;aaaaaaA1;Abádszalók2;64;191;1;2;cimke1;Abádszalók;Abádszalók közzétevö feljegyzes;Sportolók;Akciókhoz;1;Vízálló;1000;1 nap;5241;Abádszalók;Kunhegyesi

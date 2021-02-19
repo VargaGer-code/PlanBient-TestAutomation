@@ -168,7 +168,7 @@ class MediasTest(unittest.TestCase):
     @data(*getCSVData(
         "C:\\Users\\Felhasználó\\PycharmProjects\\PlanBient-TestAutomation\\tests\\mediasTest\\mediasDatas.csv"))
     @unpack
-    def test_mediaViewDataVerification(self, userEmailDDT, userpwDDT, mediaNameDDT, lenghtDDT, heightDDT, qtyDDT,
+    def mediaViewDataVerification(self, userEmailDDT, userpwDDT, mediaNameDDT, lenghtDDT, heightDDT, qtyDDT,
                     isDigitalDDT, labelsDDT, detailsDDT, commentsDDT, targetGroupDDT, useProposalDDT,
                     customerCreativeDDT, extrasDDT,
                     contactNumDDT, rentTimeDDT, postCodeDDT, cityDDT, streetDDT):
@@ -246,3 +246,27 @@ class MediasTest(unittest.TestCase):
         mediaDatasFromFile = self.mediasPage.listFromTableData(mediaNameDDT, heightDDT, lenghtDDT, qtyDDT, isDigitalDDT)
         areListsMatch = self.util.verifyListMatch(mediaDatasFromFile, mediaDatasFromTable)
         assert areListsMatch == True
+
+    def test_multiselect(self):
+        textList = ["new", "label", "fanta"]
+        testString = "new-label-fanta"
+        self.loginPage.login("gergo.varga+kozzetevo1@sensomedia.hu", "aaaaaaA1")
+        self.mainMenu.openMediasTopbar()
+        self.mainMenu.openMediasPage()
+        self.mediasPage.clickAddNewMedia()
+        self.mediasPage.addValuesToMultiSelectField(self.mediasPage._labelsMultiSelect, testString)
+        self.mediasPage.compareMultiselectValues(actualValues=self.mediasPage.getElementsTextFromMultiselectField(locator="Címkék"),
+                                                 exceptedValues=textList)
+        self.mediasPage.isMultiselectElementVisible(multiSelectName="Címkék", multiSelectElement="fanta")
+        # self.mediasPage.clickOnSpecificMultiselectValue(locator="Címkék", valueToClick="fanta")
+        self.mediasPage.clickOnAllMultiselectValue("Címkék")
+        self.mediasPage.isMultiselectElementVisible(multiSelectName="Címkék", multiSelectElement="fanta")
+
+
+
+
+
+
+
+
+

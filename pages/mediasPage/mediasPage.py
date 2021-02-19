@@ -146,6 +146,63 @@ class MediasPage(BasePage):
         self.sendKeys(city, self._cityField)
         self.sendKeys(street, self._streetField)
 
+    # Multiselect functions
+    def addValuesToMultiSelectField(self, locator, dataString, locatorType="xpath"):
+        """
+        Send datas to multiselect. Put an enter after each value
+        :param locator: multiselect locator
+        :param listOfValues: strings to put into multiselect input
+        """
+        list = dataString.split("-")
+        for value in range(len(list)):
+            self.sendKeysWithEnter(data=list[value], locator=locator, locatorType=locatorType)
+
+    def getElementsTextFromMultiselectField(self, locator):
+        """
+        Get the text from multiselect values.
+        :param locator: Multiselect locator
+        :return: List with the multiselect values
+        """
+        elementList = self.getTexts("//span[contains(text(), '" + locator + "')]//parent::div//div[@class='form__form-group-input-wrap']//div[@class='multiple-search-select__label']")
+        return elementList
+
+    def compareMultiselectValues(self, actualValues, exceptedValues):
+        """
+        Compare the multiselect values with the given excepted values.
+        :return: True if lists are match, False if not match
+        """
+        areListsMatch = self.util.verifyListMatch(expectedList=exceptedValues, actualList=actualValues)
+        return areListsMatch
+
+    def clickOnSpecificMultiselectValue(self, locator, valueToClick):
+        """
+        Clicks on a specific multiselect value
+        valueToClick: String, clicking on this web element
+        """
+        self.elementClick("//span[contains(text(), '" + locator + "')]//parent::div//div[@class='form__form-group-input-wrap']//div[contains(text(),'" + valueToClick + "')]")
+
+    def clickOnAllMultiselectValue(self, locator):
+        """
+        Clicks on all the elements in a multiSelect field
+        :param locator: Multiselect field name
+        """
+        elementList = self.getTexts("//span[contains(text(), '" + locator + "')]//parent::div//div[@class='form__form-group-input-wrap']//div[@class='multiple-search-select__label']")
+        for element in range(len(elementList)):
+            self.elementClick("//span[contains(text(), '" + locator + "')]//parent::div//div[@class='form__form-group-input-wrap']//div[contains(text(),'" + elementList[element] + "')]")
+
+    def isMultiselectElementVisible(self, multiSelectName, multiSelectElement):
+        """
+        Check if element is visible in multiselect field
+        :param multiSelectName: Multiselect field name
+        :param multiSelectElement: Element to validate visibility
+        :return: True if visible, False if not visible
+        """
+        isElementVisible = self.isElementPresent("//span[contains(text(), '" + multiSelectName +
+                                                 "')]//parent::div//div[@class='form__form-group-input-wrap']//div[contains(text(),'" + multiSelectElement + "')]")
+        return isElementVisible
+
+    #def clickOnAllMultiselectValue(self):
+
     def clickSaveMediaBtn(self):
         self.elementClick(self._saveNewMediaBtn)
 

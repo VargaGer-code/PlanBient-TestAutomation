@@ -48,6 +48,7 @@ class SeleniumDrivers():
     def getElementList(self, locator, locatorType="xpath"):
         """
         Get list of elements
+        Return: list of elements
         """
         element = None
         try:
@@ -56,6 +57,7 @@ class SeleniumDrivers():
             element = self.driver.find_elements(byType, locator)
             self.log.info("Element list found with locator: " + locator +
                           " and  locatorType: " + locatorType)
+            self.log.info("Elements in list :: " + element)
         except:
             self.log.info("Element list not found with locator: " + locator +
                           " and  locatorType: " + locatorType)
@@ -156,7 +158,7 @@ class SeleniumDrivers():
                 element = self.getElement(locator, locatorType)
             element.send_keys(data)
             element.send_keys(Keys.ENTER)
-            self.log.info("Sent data on element with locator: " + locator +
+            self.log.info("Sent data :: " + str(data) + " :: on element with locator: " + locator +
                           " locatorType: " + locatorType)
         except:
             self.log.info("Cannot send data on the element with locator: " + locator +
@@ -194,25 +196,21 @@ class SeleniumDrivers():
             text = None
         return text
 
-
-    def getTexts(self, locator="", locatorType="xpath", element=None):
+    def getTexts(self, locator="", locatorType="xpath"):
         textList = []
         """
         Get 'Texts' from elements, and put the elements into a list
-        Either provide element or a combination of locator and locatorType
         """
         try:
-            if locator: # Locator is not empty
-                element = self.getElementList(locator, locatorType)
-                self.log.debug("Element length: " + str(len(element)))
-            for elements in element:
-                textList.append(self.getText(elements))
-                self.log.debug("Text on element: " + str(self.getText(elements)))
+            elementList = self.getElementList(locator, locatorType)
+            self.log.debug("Element length: " + str(len(elementList)))
+            for element in range(len(elementList)):
+                text = elementList[element].text
+                textList.append(text)
         except:
             self.log.error("Failed to get text on element")
-            #print_stack()
+        self.log.info("Elements in list :: " + str(textList))
         return textList
-
 
     def clearKeys(self, locator, locatorType="xpath"):
         try:

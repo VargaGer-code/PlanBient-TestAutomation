@@ -106,16 +106,15 @@ class Util(object):
 
     def verifyListMatch(self, expectedList, actualList):
         """
-        Verify two list matches
-
+        Verify two list matches.
         Parameters:
             expectedList: Expected List
             actualList: Actual List
         """
         self.log.info("Expected list is: " + str(expectedList))
         self.log.info("Actual list is: " + str(actualList))
-        self.log.info("Excepted list type is: " + str(type(expectedList)))
-        self.log.info("Actual list type is: " + str(type(actualList)))
+        self.log.debug("Excepted list type is: " + str(type(expectedList)))
+        self.log.debug("Actual list type is: " + str(type(actualList)))
         if expectedList == actualList:
             self.log.info("The two lists are equal")
             return True
@@ -154,3 +153,14 @@ class Util(object):
             list.sort(reverse=True)
             self.log.info("List sorted by desc :: " + str(list))
             return list
+
+    def splitCsvData(self, dataString, separator="-"):
+        """
+        Splits the input string. Splits by separator
+        :param separator: String to separate
+        :return: list of strings
+        """
+        list = dataString.split(separator)
+        self.log.info("Input string string :: " + str(dataString))
+        self.log.info("List made from string :: " + str(list))
+        return list

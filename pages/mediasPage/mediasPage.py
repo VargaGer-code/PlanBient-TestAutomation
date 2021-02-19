@@ -3,7 +3,6 @@ from base.basepage import BasePage
 from utilities.util import Util
 import logging
 
-
 class MediasPage(BasePage):
     log = cl.customLogger(logging.DEBUG)
     util = Util()
@@ -17,7 +16,7 @@ class MediasPage(BasePage):
     _addNewMediaBtn = "Új médiafelület"
     _mediaTitle = "//h3[contains(text(), 'Médiafelület lista')]"
 
-    ### Add new media locators
+    ### Add new / modify media locators
     _addNewMediaTitle = "//h3[contains(text(), 'Médiafelület felvétel')]"
     # Common details
     _mediaNameField = "//input[@name='title']"
@@ -46,15 +45,47 @@ class MediasPage(BasePage):
     _saveNewMediaBtn = "//button[@type='submit']"
     _cancelBtn = "//button[contains(text(), 'Mégse')]"
 
+    ### View media datasheet locators
+    _mediaTitleView = "//h4[@class='media-card__title']"
+    _mediaSizeView = "//p[contains(text(), 'Méret')]//parent::div//span"
+    _mediaQuantityView = "//p[contains(text(), 'Darabszám')]//parent::div//span"
+    _mediaIsDigitalView = "//p[contains(text(), 'Digitális felület')]//parent::div//span"
+    _mediaDetailsView = "//p[contains(text(), 'Leírás')]//parent::div//div"
+    _mediaCommentsView = "//p[contains(text(), 'Reklámközzétevő feljegyzései')]//parent::div//div"
 
+    # View Marketing datas
+    _marketingTab = "//a[contains(text(),'Marketing adatok')]"
+    _targetGroupView = "//p[contains(text(), 'Elérhető célcsoport')]//parent::div//span"
+    _useProposalView = "//p[contains(text(), 'Felhasználási javaslat')]//parent::div//span"
+    _contactNumberView = "//p[contains(text(), 'Kontaktusszám')]//parent::div//span"
+    _rentTimeView = "//p[contains(text(), 'Bérlési időtartam egysége')]//parent::div//span"
+    _customerCreativeView = "//p[contains(text(), 'Ügyfél gyárthatja-e a kreatívot?')]//parent::div//span"
+    _extraOptionsView = "//p[contains(text(), 'Extra lehetőségek')]//parent::div//span"
+
+    # View Location datas
+    _locationTab = "//a[contains(text(),'Helyszín')]"
+    _postCodeView = "//p[contains(text(), 'Irányítószám')]//parent::div//span"
+    _cityView = "//p[contains(text(), 'Település')]//parent::div//span"
+    _streetView = "//p[contains(text(), 'Közterület adatai')]//parent::div//span"
+
+    # View Other datas
+    _otherTab = "//a[contains(text(),'Egyéb adatok')]"
+
+    _viewBackBtn = "//button[contains(text(),'Vissza')]"
 
     ### Actions
     # Medias list page
 
-    def openAddNewMedia(self):
+    def clickAddNewMedia(self):
         self.elementClick(self._addNewMediaBtn, "link")
 
-    def checkMediaTitlePresent(self):
+    def clickModifyMediaBtn(self, mediaName):
+        self.elementClick("//td[contains(text(),'" + mediaName + "')]//parent::tr//a[@title='Szerkesztés']")
+
+    def clickViewMediaBtn(self, mediaName):
+        self.elementClick("//td[contains(text(),'" + mediaName + "')]//parent::tr//a[@title='Adatlap']")
+
+    def checkMediaListPageTitlePresent(self):
         isMediaTitlePresent = self.isElementPresent(self._mediaTitle)
         return isMediaTitlePresent
 
@@ -66,6 +97,16 @@ class MediasPage(BasePage):
         isMediaNameInList = self.isElementPresent("//td[contains(text(), '" + mediaName + "')]")
         return isMediaNameInList
 
+    def listFromTableData(self, mediaName, provider, length, height, qty, isDigital):
+        listFromFileData = []
+        listFromFileData.append(mediaName)
+        listFromFileData.append(provider)
+        listFromFileData.append(length)
+        listFromFileData.append(height)
+        listFromFileData.append(qty)
+        listFromFileData.append(isDigital)
+        self.log.info("listFromTableData is : " + str(listFromFileData))
+        return listFromFileData
 
     # Add new media page
 
@@ -80,6 +121,7 @@ class MediasPage(BasePage):
         self.sendKeys(length, self._lenghtField)
         self.sendKeys(height, self._heightField)
         self.sendKeys(qty, self._qtyField)
+        #  1 - igen , 2 - Nem
         if isDigital == "1":
             self.elementClick(self._mediaTypeRadioBtn + "[1]")
         elif isDigital == "2":
@@ -91,7 +133,7 @@ class MediasPage(BasePage):
         self.webScrollToElement(self._saveNewMediaBtn)
         self.sendKeysWithEnter(targetGroup, self._targetGroupMultiSelect)
         self.sendKeysWithEnter(useProposal, self._useProposalMultiSelect)
-        #self.clickNearElement(self._customerCreativeRadioBtn, xOffset=-400)
+        # self.clickNearElement(self._customerCreativeRadioBtn, xOffset=-400)
         self.sendKeys(contactNum, self._contactNumberField)
         self.sendKeys(rentTime, self._rentTimeDropDown)
         if customerCreative == "1":
@@ -107,14 +149,63 @@ class MediasPage(BasePage):
     def clickSaveMediaBtn(self):
         self.elementClick(self._saveNewMediaBtn)
 
-    def listFromTableData(self, mediaName, provider, length, height, qty, isDigital):
-        listFromFileData = []
-        listFromFileData.append(mediaName)
-        listFromFileData.append(provider)
-        listFromFileData.append(length)
-        listFromFileData.append(height)
-        listFromFileData.append(qty)
-        listFromFileData.append(isDigital)
-        self.log.info("listFromTableData is : " + str(listFromFileData))
-        return listFromFileData
+    # Modify media page
+    def verifyInputFieldData(self, locator, exceptedText):
+        result = self.util.verifyTextMatch(actualText=BasePage.getTextFromInputField(self, locator),
+                                           expectedText=exceptedText)
+        return result
 
+    def verifyMultiselectData(self, locatorName, exceptedText):
+        result = self.util.verifyTextMatch(actualText=BasePage.getTextFromMultiSelectField(self, locatorName),
+                                           expectedText=exceptedText)
+        return result
+
+    # View media page
+    def clickMarketingTab(self):
+        self.elementClick(self._marketingTab)
+
+    def clickLocationTab(self):
+        self.elementClick(self._locationTab)
+
+    def clickOtherTab(self):
+        self.elementClick(self._otherTab)
+
+    def clickViewBackBtn(self):
+        self.elementClick(self._viewBackBtn)
+
+    def verifyViewText(self, locator, exceptedText):
+        result = self.verifyText(actualText=locator,
+                                 exceptedText=exceptedText)
+        return result
+
+    def formatMediaSize(self, height, length, unit="cm"):
+        formattedSize = height + " x " + length + " " + unit
+        return formattedSize
+
+    def verifyMediaSizeView(self, height, length):
+        result = self.verifyText(actualText=self._mediaSizeView,
+                                 exceptedText=self.formatMediaSize(height=height, length=length))
+        return result
+
+    def formatQuantity(self, quantity):
+        formattedQty = quantity + " db"
+        return formattedQty
+
+    def verifyQuantity(self, exceptedText):
+        result = self.verifyText(actualText=self._mediaQuantityView,
+                                 exceptedText=self.formatQuantity(exceptedText))
+        return result
+
+    def formatRadioBtntoText(self, text):
+        if text == "Igen":
+            return "1"
+        elif text == "Nem":
+            return "2"
+
+    def verifyRadioBtn(self, locator, excepedOption):
+        optionText = self.getText(locator)
+        radioBtnOption = self.formatRadioBtntoText(optionText)
+        if excepedOption == radioBtnOption:
+            return True
+        elif excepedOption != radioBtnOption:
+            return False

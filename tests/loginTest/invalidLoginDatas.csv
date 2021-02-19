@@ -1,0 +1,18 @@
+emailAddressDDT;pwDDT;locatorDDT;alertMsgDDT
+;;//input[@name='email'];Ezt az értéket meg kell adni!
+gergo.varga+MHFE_6@sensomedia.;a;;Ez az érték nem egy érvényes e-mail cím!
+gergo.varga+MHFE_6@sensomedia;a;;Ez az érték nem egy érvényes e-mail cím!
+gergo.varga+MHFE_6@;a;;Ez az érték nem egy érvényes e-mail cím!
+gergo.varga+MHFE_6;a;;Ez az érték nem egy érvényes e-mail cím!
+gergo.varga+MHFE_6@sensomedia.hu;;//input[@name='password'];Ezt az értéket meg kell adni!
+gergo.varga+MHFE_6@sensomedia.hu;a;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;aa;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;aaa;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;aaaa;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;aaaaa;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;aaaaaa;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;aaaaaaa;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;aaaaaaaa;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;aaaaaaaaa;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;aaaaaaaA;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet
+gergo.varga+MHFE_6@sensomedia.hu;11111111;//input[@name='password'];kell állnia, és tartalmaznia kell legalább 1 számjegyet, 1 nagybet

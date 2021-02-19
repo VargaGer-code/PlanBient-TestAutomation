@@ -163,6 +163,15 @@ class SeleniumDrivers():
                   " locatorType: " + locatorType)
             #print_stack()
 
+    def getTextByAttribute(self, locator, locatorType="xpath", attribute="value"):
+        """
+        Get text from element by the element's attribute. Default attribute is "value" because its mostly used with
+        input fields.
+        :return: Text in element string
+        """
+        element = self.getElement(locator, locatorType)
+        textInElement = element.get_attribute(attribute)
+        return str(textInElement)
 
     def getText(self, locator="", locatorType="xpath", element=None, info=""):
         """
@@ -177,7 +186,6 @@ class SeleniumDrivers():
             if len(text) == 0:
                 text = element.get_attribute("innerText")
             if len(text) != 0:
-                self.log.info("Getting text on element :: " + info)
                 self.log.info("The text is :: '" + text + "'")
                 text = text.strip()
         except:
@@ -365,6 +373,7 @@ class SeleniumDrivers():
 
     def webScrollToElement(self, locator, locatorType="xpath"):
         ActionChains(self.driver).move_to_element(self.getElement(locator, locatorType)).perform()
+        self.log.info("Scrolled to element :: " + locator)
 
 
     def getAttributeValue(self, attribute, locator, locatorType="xpath"):

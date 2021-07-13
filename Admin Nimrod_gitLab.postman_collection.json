@@ -719,7 +719,7 @@
 			"response": []
 		},
 		{
-			"name": "moonPhases",
+			"name": "moonPhases_holdnaptar",
 			"request": {
 				"method": "GET",
 				"header": [
